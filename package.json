@@ -1,0 +1,28 @@
+{
+  "name": "liri-bot",
+  "version": "1.0.0",
+  "description": "LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "SIRI"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebk13579/liri-node-app.git"
+  },
+  "keywords": [
+    "liri",
+    "siri",
+    "spotify",
+    "bands",
+    "in",
+    "town",
+    "omdb"
+  ],
+  "author": "EBK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ebk13579/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/ebk13579/liri-node-app#readme"
+}
