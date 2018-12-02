@@ -2,7 +2,7 @@ require('dotenv').config();
 
 console.log('this is loaded');
 
-var spotify = {
+exports.spotify = {
   id: process.env.SPOTIFY_ID,
   secret: process.env.SPOTIFY_SECRET
 };
@@ -16,6 +16,6 @@ var spotify = {
 //   secret: process.env.SPOTIFY_SECRET
 // };
 
-module.exports = spotify;
-console.log("spotifyKeys: " + spotify);
+// module.exports = spotify;
+// console.log("spotifyKeys: " + spotify);
 // // module.exports.spotifyKeys;
