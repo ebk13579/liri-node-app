@@ -7,6 +7,9 @@ var request = require("request");
 var moment = require("moment");
 var fs = require("fs");
 
+var input1 = process.argv[2];
+var input2 = process.argv.slice(3).join(" ");
+
 // Request for the keys folder
 const keys = require("./keys.js");
 const spotify = new Spotify({
@@ -24,12 +27,13 @@ secret: process.env.SPOTIFY_SECRET
 //     secret: process.env.SPOTIFY_SECRET
 //   });
 
-var spotifyThis = function(songTitle) {
+var spotifyThis = function(track) {
 
-	spotify.search({ type: 'track', query: songTitle }, function (err, data) {
+	spotify.search({ type: 'track', query: track }, function (err, data) {
 		if (err) {
 			return console.log('Error occurred: ' + err);
 		}
+		console.log('song-track: ' + track);
 		var songs = data.tracks.items;
 		for (var i = 0; i < songs.length; i++) {
 			console.log("\n" + "~".repeat(29));
@@ -67,7 +71,7 @@ var movieThis = function (movieTitle) {
 var concertThis = function (artistPlace) {
 	request('https://rest.bandsintown.com/artists/' + artistPlace + '/events?app_id=trilogy', function (error, response, body) {
 		if (error) {
-			return console.log('Error occurred: ' + error);
+			return console.log('Bands-in-town error: ' + error);
 		}
 
 		var jsonData = JSON.parse(body);
@@ -88,32 +92,35 @@ var concertThis = function (artistPlace) {
 var doWhatItSays = function () {
 	fs.readFile("random.txt", "utf8", function (err, data) {
 		if (err) throw err;
-
-		var dataArray = data.split(',');
-		if (dataArray.length == 2) {
-			liriThis(dataArray[0], dataArray[1]);
-		} else if (dataArray.length == 1) {
-			liriThis(dataArray[0]);
+		var dataArray = [];
+		dataArray = data.split(',');
+		console.log('dataArray[0]: ' + dataArray[0]);
+		console.log('dataArray[1]: ' + dataArray[1]);
+		input1 = dataArray[0];
+		input2 = dataArray[1];
+		liriThis(input1, input2);
 		}
+	)}
 
-	})
-}
+	
+
 
 var liriThis = function (caseData, funcData) {
 	switch (caseData) {
 		case "spotify-this-song":
-			if (!funcData) {
-				funcData = "The Sign"
-				spotifyThis(funcData);
+			if (!input2) {
+				var fD = "The Sign";
+				console.log('fD: ' + fD);
+				spotifyThis(fD);
 				break;
 			}
 			spotifyThis(funcData);
             break;
             
         case "movie-this":
-            if (!funcData){
-                funcData = "Mr. Nobody";
-				movieThis(functData);
+            if (!input2){
+                var fD = "Mr. Nobody";
+				movieThis(fD);
 				break;
             }
 			movieThis(funcData);
@@ -131,9 +138,5 @@ var liriThis = function (caseData, funcData) {
 			console.log("LIRI says whaaat?");
 	}
 }
-
-
-var input1 = process.argv[2];
-var input2 = process.argv.slice(3).join(" ");
 
 liriThis(input1, input2);
