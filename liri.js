@@ -85,6 +85,20 @@ var concertThis = function (artistPlace) {
 	});
 }
 
+var doWhatItSays = function () {
+	fs.readFile("random.txt", "utf8", function (err, data) {
+		if (err) throw err;
+
+		var dataArray = data.split(',');
+		if (dataArray.length == 2) {
+			liriThis(dataArray[0], dataArray[1]);
+		} else if (dataArray.length == 1) {
+			liriThis(dataArray[0]);
+		}
+
+	})
+}
+
 var liriThis = function (caseData, funcData) {
 	switch (caseData) {
 		case "spotify-this-song":
