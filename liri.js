@@ -31,7 +31,7 @@ var spotifyThis = function(track) {
 
 	spotify.search({ type: 'track', query: track }, function (err, data) {
 		if (err) {
-			return console.log('Error occurred: ' + err);
+			return console.log('End.');
 		}
 		console.log('song-track: ' + track);
 		var songs = data.tracks.items;
